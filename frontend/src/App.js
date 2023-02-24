@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-
+import {useEffect, useState} from "react"
 function App() {
+  const [category, setCategory] = useState()
+
+  useEffect(()=>{
+    async function fetchProducts() {
+    const results = await fetch('http://localhost:8000/api/category_list/')
+    const categories_results = await results.json()
+    console.log(categories_results.map((data)=>data.name))
+    setCategory(categories_results.map((data)=>data.name))
+    }
+    fetchProducts()
+  }, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>E-commerce Frontend</h1>
+      {category.map((data)=> (
+        <li key={data.id}>{data}</li>
+      ))}
     </div>
   );
 }

@@ -10,6 +10,8 @@ django-cors-headers = "*"
 django-ckeditor = "*"
 pillow = "*"
 django-environ = "*"
+django-generate-secret-key = "*"
+environ = "*"
 
 [dev-packages]
 

@@ -16,11 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from rest_framework import routers                 
+from django.views.generic.base import RedirectView
+from shop.views import CategoryViewSet, ProductViewSet
+router = routers.DefaultRouter()
+router.register(r'category_list', CategoryViewSet)
+router.register(r'product_list', ProductViewSet)                   
+# router.register(r'api', views.TodoView, 'todo')  
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include('shop.urls')),
-    path("", include('info.urls')),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('', TemplateView.as_view(template_name='index.html'))
+    path('api/', include(router.urls)),
+    path('', RedirectView.as_view(url='/api/', permanent=True))      
+
+    # path("", include('shop.urls')),
+    # path("", include('info.urls')),
+    # path('ckeditor/', include('ckeditor_uploader.urls')),
+    # path('', TemplateView.as_view(template_name='index.html'))
 ]
