@@ -27,7 +27,7 @@ class Product(models.Model):
     brand = models.CharField(max_length=255) 
     title = models.CharField(max_length=255, unique=True)
     description = RichTextUploadingField()
-    image = models.ImageField() 
+    image = models.ImageField(blank=True,upload_to='media/') 
     slug = models.SlugField(max_length=255, unique=True) 
     price = models.DecimalField(max_digits=9,decimal_places=2) 
     discount_price = models.DecimalField(max_digits=9,decimal_places=2,blank=True,default=0.00) 
@@ -76,7 +76,7 @@ class Concern(models.Model):
 class ProductImages(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     title = models.CharField(max_length=255, unique=True) 
-    image = models.ImageField()
+    image = models.ImageField(blank=True,upload_to='media/')
 
     class Meta: 
         db_table = 'image-gallery'

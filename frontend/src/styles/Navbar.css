@@ -1,0 +1,72 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding: 0 20px;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .menu-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-right: 20px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .menu-button {
+      display: block;
+    }
+    .nav-icons {
+      display: none;
+    }
+  }
+  
+  .wishlist-button,
+  .cart-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 20px;
+    position: relative;
+  }
+  
+  .wishlist-button:hover i,
+  .cart-button:hover i {
+    color: #ff9800;
+  }
+  
+  .cart-count {
+    background-color: #ff9800;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 0.8rem;
+    height: 16px;
+    line-height: 16px;
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    width: 16px;
+    text-align: center;
+  }
+  

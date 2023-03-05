@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "shop",
     "rest_framework",
     "ckeditor",
+    "ckeditor_uploader",
     "info",
     "corsheaders",
 ]
@@ -89,11 +90,22 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    'default': {
+       'NAME': env('DATABASE_NAME'),
+       'ENGINE': 'django.db.backends.mysql',
+       'HOST': 'localhost',
+       'USER': env('DATABASE_USER'),
+       'PASSWORD': env('DATABASE_PASSWORD'),
+       'PORT': '3306',
+       'TEST': {
+            'NAME': 'models_test',
+        },
+        'OPTIONS': {
+            "init_command": "SET foreign_key_checks = 0;",
+        },
+     }
 }
+
 
 
 # Password validation
@@ -132,6 +144,11 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [ os.path.join(REAL_BASE_DIR, 'frontend/build/static')]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
