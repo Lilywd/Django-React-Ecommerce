@@ -1,6 +1,8 @@
 import { createTheme } from "@mui/material/styles";
 import { darken, lighten } from "polished";
 
+export const DrawerWidth = 250;
+
 export const Colors = {
     primary: "#5f2c3e",
     secondary: "#d1adcc",
@@ -62,6 +64,23 @@ export const Colors = {
               },
             },
           },
+        },
+        MuiDrawer: {
+          styleOverrides: {
+            paper: {
+              width: DrawerWidth,          
+              background: Colors.black,
+              color: Colors.light,
+              
+            }
+          }
+        },
+        MuiDivider: {
+          styleOverrides: {
+            root: {
+              borderColor: lighten(0.5, Colors.border)
+            }
+          }
         },
     }
   

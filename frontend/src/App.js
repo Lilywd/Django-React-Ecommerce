@@ -7,6 +7,14 @@ import Banner from './components/banner';
 import Slider from './components/promotions'
 import Products from './components/products'
 import Footer from './components/footer';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Activate from './pages/Activate';
+import ResetPassword from './pages/ResetPassword';
+import ResetPasswordConfirm from './pages/ResetPasswordConfirm';
+import AppDrawer from './components/drawer';
+import { UIProvider } from "./context/ui";
+import SearchBox from "./components/search";
 
 
 function App() {
@@ -23,6 +31,7 @@ function App() {
         background: "#fff",
       }}
     >
+      <UIProvider>
       <Slider />
       <Appbar/>
       <Banner/>
@@ -32,9 +41,14 @@ function App() {
             </Box>
       <Products/>
       <Box display="flex" justifyContent="center"  sx={{ p: 4   }}>
-              <Button variant="h4" >View all products</Button>
-            </Box>
+              <Button   sx={{ mt: 4, mb: 4 }}
+              variant="contained" >View all products</Button>
+      </Box>
+      
       <Footer/>
+      <AppDrawer/>
+      <SearchBox />
+      </UIProvider>
       {
         /*
       
@@ -55,3 +69,4 @@ function App() {
 }
 
 export default App;
+

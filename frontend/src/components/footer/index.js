@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+// import styled from "@emotion/styled";
 import {
   Grid,
   List,
@@ -6,7 +6,7 @@ import {
   Typography,
   Button,
   Stack,
-  Container,
+  // Container,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { Colors } from "../../styles/theme";
@@ -20,7 +20,7 @@ export default function Footer() {
   return (
     <Box
       sx={{
-        background: Colors.shaft,
+        background: Colors.black,
         color: Colors.white,
         p: { xs: 4, md: 10 },
         pt: 12,
