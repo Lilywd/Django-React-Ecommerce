@@ -1,4 +1,4 @@
-"""users URL Configuration
+"""authentication URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include, re_path
 
-
 # DRF YASG
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -35,7 +34,6 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
-
 urlpatterns = [
     path("admin/", admin.site.urls),
     re_path(
@@ -43,9 +41,9 @@ urlpatterns = [
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
-    path("api/v1/", include("authentication.urls")),
-    path('api/v1/', include('djoser.urls')),
-    path('api/v1/', include('djoser.urls.jwt')),
+    path("api/v1/", include("users.urls")),
+    path("api/v1/", include("djoser.urls")),
+    path("api/v1/", include("djoser.urls.jwt")),
+    path("api/v1/", include("djoser.social.urls")),
 
 ]
-
