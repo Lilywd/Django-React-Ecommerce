@@ -1,9 +1,9 @@
+import React from 'react'
 import Badge  from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
-import React from "react";
 import styled from "styled-components";
-import { mobile } from "src/responsive";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   height: 60px;
@@ -79,7 +79,7 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>LAMA.</Logo>
+          <Logo>LOGO.</Logo>
         </Center>
         <Right>
           <MenuItem>REGISTER</MenuItem>
@@ -92,7 +92,7 @@ const Navbar = () => {
         </Right>
       </Wrapper>
     </Container>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

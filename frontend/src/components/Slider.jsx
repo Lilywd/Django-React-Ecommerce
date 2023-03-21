@@ -1,11 +1,9 @@
-
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import { useState } from "react";
 import styled from "styled-components";
-import { sliderItems } from "src/data";
-import { mobile } from "src/responsive";
+import { sliderItems } from "../data";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100%;

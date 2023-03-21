@@ -1,21 +1,41 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import {createBrowserRouter,RouterProvider,} from "react-router-dom";
 import App from './App'
-import Product from "src/pages/Product";
-import ProductList from "src/pages/ProductList";
-import Register from "src/pages/Register";
-import Login from "src/pages/Login";
-import Cart from "src/pages/Cart";
+import Login from "./pages/Login";
+import Cart from "./pages/Cart";
+import Product from "./components/Product";
 
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+   
+  },
+
+  {
+    path: "/login",
+    element: <Login />,
+   
+  },
+
+  {
+    path: "/cart",
+    element: <Cart />,
+   
+  },
+
+{
+    path: "/product",
+    element: <Product />,
+   
+  },
+ 
+ 
+]);
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
-    <Cart/>
-    <Login/>
-    <Register/>
-    <Product/>
-    <ProductList/>
-
-  </React.StrictMode>,
-)
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);

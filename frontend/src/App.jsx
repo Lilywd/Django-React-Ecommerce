@@ -1,25 +1,26 @@
+import Anouncement from "./components/Anouncement";
+import Categories from "./components/Categories";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import Products from "./components/Products";
+import Newsletter from "./components/Newsletter";
+import Slider from "./components/Slider";
 
-import React from "react";
-import Announcement from "src/components/Announcement";
-import Categories from "src/components/Categories";
-import Footer from "src/components/Footer";
-import Navbar from "src/components/Navbar";
-import Newsletter from "src/components/Newsletter";
-import Products from "src/components/Products";
-import Slider from "src/components/Slider";
 
-const Home = () => {
+function App() {
+  
+
   return (
-    <div>
-      <Announcement />
-      <Navbar />
-      <Slider />
-      <Categories />
+    <div className="App">
+      <Anouncement/>
+      <Navbar/>
+      <Slider/>
+      <Categories/>
       <Products/>
       <Newsletter/>
       <Footer/>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default App

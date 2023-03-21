@@ -1,4 +1,3 @@
-
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -6,8 +5,9 @@ import RoomIcon from "@mui/icons-material/Room";
 import MailIcon from "@mui/icons-material/Mail";
 import PhoneIcon from "@mui/icons-material/Phone";
 import styled from "styled-components";
-import { mobile } from "src/responsive";
-  
+import { mobile } from "../responsive";
+import PinterestIcon from "@mui/icons-material/Pinterest";
+
 const Container = styled.div`
     display: flex;
     ${mobile({ flexDirection: "column" })}

@@ -1,11 +1,11 @@
-import  MinimizeIcon  from "@mui/icons-material/Minimize";
-import  AddIcon  from "@mui/icons-material/Add";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import styled from "styled-components";
-import Announcement from "src/components/Announcement";
-import Footer from "src/components/Footer";
-import Navbar from "src/components/Navbar";
-import Newsletter from "src/components/Newsletter";
-import { mobile } from "src/responsive";
+import Anouncement from "../components/Anouncement";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import Newsletter from "../components/Newsletter";
+import { mobile } from "../responsive";
 
 const Container = styled.div``;
 
@@ -104,6 +104,7 @@ const Amount = styled.span`
   margin: 0px 5px;
 `;
 
+
 const Button = styled.button`
   padding: 15px;
   border: 2px solid teal;
@@ -118,8 +119,9 @@ const Button = styled.button`
 const Product = () => {
   return (
     <Container>
+    <Anouncement />
       <Navbar />
-      <Announcement />
+      
       <Wrapper>
         <ImgContainer>
           <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
@@ -154,7 +156,7 @@ const Product = () => {
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <MinimizeIcon />
+              <RemoveIcon />
               <Amount>1</Amount>
               <AddIcon />
             </AmountContainer>

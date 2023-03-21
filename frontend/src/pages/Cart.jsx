@@ -1,10 +1,10 @@
-import  MinimizeIcon  from "@mui/icons-material/Minimize";
-import  AddIcon  from "@mui/icons-material/Add";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import styled from "styled-components";
-import Announcement from "src/components/Announcement";
-import Footer from "src/components/Footer";
-import Navbar from "src/components/Navbar";
-import { mobile } from "src/responsive";
+import Anouncement from "../components/Anouncement";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import { mobile } from "../responsive";
 
 const Container = styled.div``;
 
@@ -156,17 +156,15 @@ const Button = styled.button`
 const Cart = () => {
   return (
     <Container>
+    <Anouncement />
       <Navbar />
-      <Announcement />
+     
       <Wrapper>
-        <Title>YOUR BAG</Title>
+        <Title>CART</Title>
         <Top>
           <TopButton>CONTINUE SHOPPING</TopButton>
-          <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
-          </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          
+          
         </Top>
         <Bottom>
           <Info>
@@ -188,9 +186,9 @@ const Cart = () => {
               </ProductDetail>
               <PriceDetail>
                 <ProductAmountContainer>
-                  <Add />
+                  <AddIcon />
                   <ProductAmount>2</ProductAmount>
-                  <Remove />
+                  <RemoveIcon />
                 </ProductAmountContainer>
                 <ProductPrice>$ 30</ProductPrice>
               </PriceDetail>
@@ -216,7 +214,7 @@ const Cart = () => {
                 <ProductAmountContainer>
                   <AddIcon />
                   <ProductAmount>1</ProductAmount>
-                  <MinimizeIcon />
+                  <RemoveIcon />
                 </ProductAmountContainer>
                 <ProductPrice>$ 20</ProductPrice>
               </PriceDetail>
