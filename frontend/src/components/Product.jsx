@@ -1,3 +1,4 @@
+
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 
@@ -67,10 +68,12 @@ const Icon = styled.div`
 `;
   
 const Product = ({ item }) => {
+ 
     return (
       <Container>
         <Circle />
-        <Image src={item.img} />
+        {/* <Image src={item.img} /> */}
+        <Image src = { item && item.img ? item.img : "https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png" } />
         <Info>
           <Icon>
             <ShoppingCartIcon />

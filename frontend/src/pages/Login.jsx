@@ -1,5 +1,10 @@
+import React, {useState} from 'react';
+import { Link } from "react-router-dom";
+import {connect} from "react-redux";
 import styled from "styled-components";
 import {mobile} from "../responsive";
+import { login } from '../actions/auth';
+
 
 const Container = styled.div`
   width: 100vw;
@@ -50,29 +55,54 @@ const Button = styled.button`
   margin-bottom: 10px;
 `;
 
-const Link = styled.a`
-  margin: 5px 0px;
-  font-size: 12px;
-  text-decoration: underline;
-  cursor: pointer;
-`;
+// const Link = styled.a`
+//   margin: 5px 0px;
+//   font-size: 12px;
+//   text-decoration: underline;
+//   cursor: pointer;
+// `;
 
-const Login = () => {
+const Login = ({login}) => {
+  const [formData, setFormData] = useState({
+      email: '',
+      password: '' 
+  });
+
+  const { email, password } = formData;
+
+  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = e => {
+      e.preventDefault();
+
+      login(email, password);
+
+      
+  };
+  
+
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
-        <Form>
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-          <Input placeholder=" confirm password" />
-          <Button>LOGIN</Button>
-          <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+        <Form onSubmit={e => onSubmit(e)}>
+          
+          <Input placeholder="Email" type="email" name ="email" value= {email} onChange={e => onChange(e)} required/>
+          <Input placeholder="Password" type="password" name ="password" value= {password}  minLength='6' onChange={e => onChange(e)} required/>
+         
+         
+          <button type='submit'>Login</button>
+          
         </Form>
+          <Link to ="/reset-pasword">DO NOT YOU REMEMBER THE PASSWORD?</Link>
+          <Link to ="/register">CREATE A NEW ACCOUNT</Link>
       </Wrapper>
     </Container>
   );
 };
 
-export default Login;
+// const mapStateToProps = state => ({
+//   // isAuthenticated: state.auth.isAuthenticated
+// });
+
+export default connect(null, { login })(Login);

@@ -2,7 +2,7 @@ import Anouncement from "./components/Anouncement";
 import Categories from "./components/Categories";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import Products from "./components/Products";
+import Product from "./components/Product";
 import Newsletter from "./components/Newsletter";
 import Slider from "./components/Slider";
 
@@ -16,7 +16,7 @@ function App() {
       <Navbar/>
       <Slider/>
       <Categories/>
-      <Products/>
+      <Product/>
       <Newsletter/>
       <Footer/>
     </div>
