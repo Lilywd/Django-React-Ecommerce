@@ -10,6 +10,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=255, unique=True) 
     keywords = models.CharField(max_length=255)
     description = models.TextField(max_length=255)
+    image = models.ImageField(blank=True,upload_to='media/category') 
     
     class Meta: 
         db_table = 'categories' 
@@ -27,7 +28,7 @@ class Product(models.Model):
     brand = models.CharField(max_length=255) 
     title = models.CharField(max_length=255, unique=True)
     description = RichTextUploadingField()
-    image = models.ImageField(blank=True,upload_to='media/') 
+    image = models.ImageField(blank=True,upload_to='media/product') 
     slug = models.SlugField(max_length=255, unique=True) 
     price = models.DecimalField(max_digits=9,decimal_places=2) 
     discount_price = models.DecimalField(max_digits=9,decimal_places=2,blank=True,default=0.00) 

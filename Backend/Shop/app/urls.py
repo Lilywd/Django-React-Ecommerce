@@ -9,4 +9,5 @@ router.register(r'product_list', ProductViewSet)
 
 urlpatterns = [
    path('api/', include(router.urls)),
+   
 ]

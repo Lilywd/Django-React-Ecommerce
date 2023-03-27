@@ -44,10 +44,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "app",
+    "settings",
     "rest_framework",
     "ckeditor",
     "ckeditor_uploader",
     "corsheaders",
+    "cloudinary"
 ]
 
 MIDDLEWARE = [
@@ -160,6 +162,22 @@ CKEDITOR_CONFIGS = {
 }
 
 
-CORS_ORIGIN_WHITELIST = [
-     'http://localhost:5173'
+# CORS HEADERS
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
+CORS_ORIGIN_WHITELIST = [
+     "http://localhost:5173",
+     "http://127.0.0.1:5173", 
+]
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dzwr0mif4',
+    'API_KEY': '781895164437899',
+    'API_SECRET': env("API_SECRET")
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
