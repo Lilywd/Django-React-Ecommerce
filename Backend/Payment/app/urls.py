@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
-from . import views
+from . views import GenerateTokenView
 
 urlpatterns = [
-    path('checkout',views.Checkout.as_view(), name="checkout")
+    path('generate-token',GenerateTokenView.as_view())
 ]
