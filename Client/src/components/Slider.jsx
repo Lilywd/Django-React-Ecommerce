@@ -1,6 +1,7 @@
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { sliderItems } from "../data";
 import { mobile } from "../responsive";
@@ -51,10 +52,12 @@ const Slide = styled.div`
 const ImgContainer = styled.div`
   height: 100%;
   flex: 1;
+  object-fit: contain;
 `;
 
 const Image = styled.img`
   height: 80%;
+ 
 `;
 
 const InfoContainer = styled.div`
@@ -99,12 +102,14 @@ const Slider = () => {
         {sliderItems.map((item) => (
           <Slide bg={item.bg} key={item.id}>
             <ImgContainer>
-              <Image src={item.img} />
+              <Image src={item.img}  alt={item.title}/>
+
             </ImgContainer>
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Button>SHOP NOW</Button>
+              <Link to='/shop'>  <Button>SHOP NOW</Button></Link>
+             
             </InfoContainer>
           </Slide>
         ))}

@@ -1,9 +1,12 @@
 import {Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom'
 import { useState, useEffect, createContext } from "react";
+import { ToastContainer ,toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
+import ContactUs from "./pages/ContactUs";
 import Checkout from "./pages/Checkout";
 import Register from "./pages/Register";
 import Footer from "./components/Footer";
@@ -24,12 +27,26 @@ function App() {
   }
   
   const [cart, setCart] = useState(localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [])
+  const cartAddInfo = () => toast.success("item added cart", {
+    position:"top-right"
+    })
+
+  const cartAlreadyInfo = () => toast.warning("item already in cart", {
+    position:"top-right"
+  })
+
   
   const updateCart = (props) => {
     if(!cart.includes(props)){
 
       setCart([...cart, props])
+     cartAddInfo()
+    
+    
     }
+    else{
+      cartAlreadyInfo()
+  }
   }
 
   const deleteItem = (props) => {
@@ -88,15 +105,18 @@ function App() {
   
 
   return (
+
     <div className="App">
       <AppContext.Provider value={{signin, userLogin, products, category,cart, deleteItem, updateCart, setCart}}>
       <Anouncement/>
+      <ToastContainer/>
         <Navbar />
         <Routes>
               <Route path="/" element= {<Home/>}></Route>
               <Route path="/login" element= {<Login/>}></Route>
               <Route path="/register" element= {<Register/>}></Route>
               <Route path="/cart" element= {<Cart/>}></Route>
+              <Route path="/contactus" element= {<ContactUs/>}></Route>
               <Route path="/checkout" element = {<RequireAuth><Checkout/></RequireAuth>}></Route>
               <Route path="*" element={<Error/>} />
         </Routes>

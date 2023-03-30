@@ -6,6 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { toast} from 'react-toastify';
 
 const Container = styled.div``;
 
@@ -159,30 +160,49 @@ const Cart = () => {
   const setCart = useContext(AppContext).setCart
   const deleteItem = useContext(AppContext).deleteItem
   
+  const cartAddInfo = () => toast.success("item added cart", {
+    position:"top-right"
+    })
+
+  const cartRemoveInfo = () => toast.error("item deleted from cart", {
+    position:"top-right"
+  })
+
+ 
   const increase = (props) => {
-   let All = cart.filter(item => item.id !== props.id)
-   let One = cart.filter(item => item.id === props.id)
-   One = One[0]
-   One.quantity += 1
-   All.push(One)
-   setCart(All)
-  }
+ 
+  let cart2 = [...cart]
+  cart2.forEach(element => {
+    if (element.id === props.id){
+      element.quantity += 1
+    }
+    
+  });
+   setCart(cart2)
+  
 
+   
+  }
   const decrease = (props) => {
-    let All = cart.filter(item => item.id !== props.id)
-    let One = cart.filter(item => item.id === props.id)
-    One = One[0]
-    if(One.quantity === 1 ){
-      deleteItem(props)
+ 
+    let cart3 = [...cart]
+    cart3.forEach(element => {
+      if (element.id === props.id){
+        if (element.quantity !== 1){
+          element.quantity -=1
+        }
+       
+        
+      }
+      
+    });
+     setCart(cart3)
+    
+  
+     
     }
-    else{
-      One.quantity -= 1
-      All.push(One)
-      setCart(All)
-    }
-
-  }
-  let Total = 0
+ 
+let Total = 0
   cart.forEach(item => {
     Total += (item.price * item.quantity)
   });
@@ -211,11 +231,11 @@ const Cart = () => {
                           <b>Product:</b> {item.title}
                         </ProductName>
                         <ProductId>
-                          <b>ID:</b> {item.id}
+                          <b>Brand:</b> {item.brand}
                         </ProductId>
                         <ProductColor color="black" />
                         <ProductSize>
-                          <b>Size:</b> {item.size ? item.size : 37.5}
+                          <b>Size:</b> {item.size ? item.size : 200}
                         </ProductSize>
                       </Details>
                     </ProductDetail>
@@ -225,7 +245,7 @@ const Cart = () => {
                         <ProductAmount>{item.quantity}</ProductAmount>
                         <RemoveIcon onClick={() =>decrease(item) }  />
 
-                        <DeleteIcon onClick={() => deleteItem(item) }/>
+                        <DeleteIcon onClick={() => {deleteItem(item); cartRemoveInfo()}}/>
                       </ProductAmountContainer>
                       <ProductPrice>$ {item.price}</ProductPrice>
                     </PriceDetail>
@@ -242,14 +262,7 @@ const Cart = () => {
               <SummaryItemText>Subtotal</SummaryItemText>
               <SummaryItemPrice>$ {Total}</SummaryItemPrice>
             </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
-            </SummaryItem>
+           
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ {Total}</SummaryItemPrice>

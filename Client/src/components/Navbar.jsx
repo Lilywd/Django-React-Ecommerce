@@ -29,6 +29,7 @@ const Left = styled.div`
 
 const Language = styled.span`
   font-size: 14px;
+  font-weight:bold;
   cursor: pointer;
   ${mobile({ display: "none" })}
 `;
@@ -51,14 +52,19 @@ const Input = styled.input`
 const Center = styled.div`
   flex: 1;
   text-align: center;
+  
 `;
 
-const Logo = styled.h1`
-  font-weight: bold;
+const Logo = styled.h3`
+  color:black;
+  
+  font-style: Nunito;
+  font-weight: light;
   ${mobile({ fontSize: "24px" })}
 `;
 const Right = styled.div`
   flex: 1;
+  
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -68,6 +74,8 @@ const Right = styled.div`
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
+  color:black;
+  font-weight:bold;
   margin-left: 25px;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
@@ -87,11 +95,12 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-           <Link to='/'><Logo>LOGO.</Logo></Link>
+           <Link to='/'><Logo>SHOP</Logo></Link>
         </Center>
         <Right>
           {user ? <> <button onClick={()=> signin(null) }>LOGOUT</button></>: 
           <> 
+           <Link to ='contactus'><MenuItem> CONTACT US</MenuItem> </Link> 
             <Link to ='register'><MenuItem> REGISTER</MenuItem> </Link> 
             <Link to ='login'> <MenuItem>SIGN IN</MenuItem></Link>
          </> }

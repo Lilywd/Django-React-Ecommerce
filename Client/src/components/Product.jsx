@@ -81,12 +81,7 @@ const Product = ({ item }) => {
             } }/>
             
           </Icon>
-          <Icon>
-            <SearchIcon />
-          </Icon>
-          <Icon>
-            <FavoriteIcon />
-          </Icon>
+        
         </Info>
       </Container>
     );

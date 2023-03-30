@@ -1,13 +1,14 @@
-import React, {useState,useEffect} from 'react';
-import { redirect } from 'react-router-dom';
+import React,{useState, useContext, useEffect} from 'react'
+import { AppContext } from '../App';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import DropIn from 'braintree-web-drop-in-react';
 import {Oval} from 'react-loader-spinner';
 import {mobile} from "../responsive";
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 80vw;
-  height: 80vh;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,6 +55,14 @@ const Button = styled.button`
 
 
 const Checkout = () => {
+
+
+  const navigate = useNavigate();
+
+  const inform = () => toast.success("Payment succesful", {
+    position:"top-right"
+    })
+
   const [formData, setFormData] = useState({
       first_name: '',
       email: '' ,
@@ -62,6 +71,7 @@ const Checkout = () => {
       country: '' ,
       state_province: '' ,
       postal_zip_code: '' ,
+      
   });
   const [clientToken, setClientToken] = useState(null);
   const [loading,setLoading] = useState(true);
@@ -73,31 +83,35 @@ const Checkout = () => {
 
   });
 
+
   const { first_name, email,street_address,city,country,state_province,postal_zip_code , } = formData;
 
-  useEffect(() => {
-    const fetchData = async () => {
-        const config = {
-            headers: {
-                'Accept': 'application/json',
-            }
-        }
-
-        // try {
-        //     // const res = await axios.get('http://localhost:8000/api/payment/generate-token', config);
-
-        //     if (res.status === 200) {
-        //         setClientToken(res.data.token);
-        //         setLoading(false);
-        //         setProcessingOrder(false);
-        //     }
-        // } catch(err) {
-            
-        // }
-    };
-
-    fetchData();
-  }, []);
+  useEffect(() =>{
+    const url = 'http://localhost:8002/api/payment/generate-token'
+              const abortCont = new AbortController();
+          // pass second arg to fetch for the sake of abort controller
+              fetch(url, { signal: abortCont.signal })
+              .then(res => {
+              if (!res.ok){
+                  throw Error("Resources not found")
+              }
+              return res.json()
+              })
+              .then((data) => {
+                
+                setClientToken(data.token);
+                setLoading(false);
+                setProcessingOrder(false);
+              })
+              .catch(() =>{
+                  //check for abort error
+                  setLoading(false);
+              })
+      
+              //clean up
+              return () => abortCont.abort();
+      
+  },  [])
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value.replace(/\ /g,'') });
   const onAddressChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -105,17 +119,90 @@ const Checkout = () => {
   
   
 
-  const buy = e =>{
+  const buy = async e =>{
     e.preventDefault();
+    if (
+      first_name !== '' &&
+      email !== '' &&
+      street_address !== '' &&
+      city !== '' &&
+      country !== '' &&
+      state_province !== '' &&
+      postal_zip_code !== ''
+    ) {
+  
+    inform()
+    navigate('/');
+
+  // let { nonce } = await data.instance.requestPaymentMethod();
+
+  //     setProcessingOrder(true);
+
+  //     const body = JSON.stringify({
+  //         first_name,
+  //         email,
+  //         street_address,
+  //         city,
+  //         country,
+  //         state_province,
+  //         postal_zip_code,
+  //         nonce
+  //     });
+  //     var myHeaders = new Headers();
+  //     myHeaders.append("Content-Type", "application/json");
+
+  //     var requestOptions = {
+  //       method: 'POST',
+  //       headers: myHeaders,
+  //       body: body,
+  //       redirect: 'follow'
+  //     };
+  //     fetch("http://localhost:8002/api/payment/process-payment",requestOptions)
+    
+  //   .then(res => {
+  //     if (!res.ok){
+  //       throw Error(res)
+  //     }
+  //       return res.json()
+  //   })
+  //   .then(result =>{
+  //   //   setIsLoading(false)
+  //   //   toast.success("Login Successful", {
+  //     setSuccess(true);
+  //     setProcessingOrder(false);
+  //     redirect ('/thank-you');
+  //   })
+  //   .catch((err) =>{
+  //       console.log(err)
+  //       setProcessingOrder(false);
+  //   //   setIsLoading(false)
+  //   //   toast.error("Invalid Credentials", {
+  //   //   position:"top-right"
+
+  //   // })
+  //   })
+      // try {
+      //     const res = await axios.post('http://localhost:8002/api/payment/process-payment', body, config);
+
+      //     if (res.status === 201)
+      //         setSuccess(true);
+      // } catch(err) {
+
+      // }
+
+      // setProcessingOrder(false);
+  }
+
+
   };
 
-  if (success)
-    return redirect ('/thank-you');
+  // if (success)
+  //   return redirect ('/thank-you');
   return (
     <Container>
       <Wrapper>
         <Title>CHECKOUT</Title>
-        <Form  onSubmit={buy}>
+        <Form  onSubmit={buy} >
           
           <Input placeholder="First name" type="text" name ="first_name" value= {first_name} onChange={onChange} required/>
           <Input placeholder="Email" type="email" name ="email" value= {email} onChange={onChange} required/>
@@ -129,9 +216,9 @@ const Checkout = () => {
 
          {
              loading || clientToken === null ? (
-                 <Load>
-                     <Oval  color='#00bfff' width={30} height={30}/>
-                </Load>
+              <Load>
+                <Oval type='oval' color='#000' width={30} height={30}/>
+              </Load>
 
              ) : (
                 <DropIn
